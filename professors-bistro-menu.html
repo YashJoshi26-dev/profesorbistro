@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professor's Bistro — Menu</title>
+
+<!-- OG / Share Meta Tags -->
+<meta property="og:title" content="Professor's Bistro">
+<meta property="og:description" content="Where every bite is a lesson in flavour. Explore our full menu.">
+<meta property="og:image" content="https://i.imgur.com/placeholder_logo.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Professor's Bistro">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --espresso: #2C1A0E;
+    --amber: #C8862A;
+    --gold: #E8B86D;
+    --rust: #8B3A2A;
+    --sage: #6B7B5E;
+    --parchment: #EDE5D4;
+    --dark: #1A1008;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--espresso);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--espresso);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    height: 72px;
+    box-shadow: 0 2px 20px rgba(0,0,0,.4);
+  }
+
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--amber);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 2px var(--gold);
+    animation: pulse-ring 3s infinite;
+  }
+
+  @keyframes pulse-ring {
+    0%,100% { box-shadow: 0 0 0 2px var(--gold); }
+    50% { box-shadow: 0 0 0 5px rgba(200,134,42,.3); }
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+
+  .logo-text span:first-child {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: .5px;
+  }
+
+  .logo-text span:last-child {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .header-nav {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .header-nav a {
+    text-decoration: none;
+    color: rgba(255,255,255,.7);
+    font-size: 13px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color .2s;
+  }
+
+  .header-nav a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    padding-top: 72px;
+    background: var(--espresso);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 20% 50%, rgba(200,134,42,.15) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 70% at 80% 30%, rgba(139,58,42,.2) 0%, transparent 60%);
+  }
+
+  .hero-grain {
+    position: absolute;
+    inset: 0;
+    opacity: .04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px;
+  }
+
+  .hero-content {
+    position: relative;
+    text-align: center;
+    z-index: 2;
+    padding: 0 20px;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp .8s .3s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 9vw, 110px);
+    font-weight: 900;
+    color: var(--cream);
+    line-height: .9;
+    margin-bottom: 10px;
+    opacity: 0;
+    animation: fadeUp .9s .5s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--amber);
+  }
+
+  .hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(16px, 2.5vw, 24px);
+    color: rgba(245,240,232,.6);
+    margin-bottom: 50px;
+    opacity: 0;
+    animation: fadeUp .9s .7s forwards;
+  }
+
+  /* Trending label */
+  .trending-label {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 20px;
+    opacity: 0;
+    animation: fadeUp .9s .9s forwards;
+  }
+
+  /* Trending Cards */
+  .trending-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp .9s 1.1s forwards;
+  }
+
+  .trend-card {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px;
+    padding: 18px 22px;
+    text-align: center;
+    width: 130px;
+    cursor: pointer;
+    transition: all .3s;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .trend-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(200,134,42,.2), transparent);
+    opacity: 0;
+    transition: opacity .3s;
+  }
+
+  .trend-card:hover { transform: translateY(-5px); border-color: var(--amber); }
+  .trend-card:hover::before { opacity: 1; }
+
+  .trend-card .badge {
+    position: absolute;
+    top: 8px; right: 8px;
+    background: var(--rust);
+    color: #fff;
+    font-size: 8px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+  }
+
+  .trend-emoji { font-size: 30px; display: block; margin-bottom: 8px; }
+
+  .trend-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: var(--cream);
+    font-weight: 700;
+  }
+
+  .trend-price {
+    font-size: 11px;
+    color: var(--gold);
+    margin-top: 4px;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0;
+    animation: fadeIn 1s 1.8s forwards;
+  }
+
+  .scroll-hint span {
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.4);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--amber), transparent);
+    animation: scrollDown 1.5s infinite;
+  }
+
+  @keyframes scrollDown {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  /* ── MENU SECTION ── */
+  .menu-section {
+    background: var(--parchment);
+    padding: 80px 0 60px;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 0 20px;
+  }
+
+  .section-eyebrow {
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 60px);
+    font-weight: 900;
+    color: var(--espresso);
+  }
+
+  /* Category Pills */
+  .cat-pills {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 20px;
+    margin-bottom: 50px;
+  }
+
+  .cat-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 22px;
+    border-radius: 40px;
+    border: 2px solid transparent;
+    background: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--espresso);
+    transition: all .25s;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cat-pill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--espresso);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s;
+    z-index: 0;
+  }
+
+  .cat-pill span { position: relative; z-index: 1; }
+
+  .cat-pill:hover { color: #fff; }
+  .cat-pill:hover::after { transform: scaleX(1); }
+
+  .cat-pill.active {
+    background: var(--espresso);
+    color: var(--cream);
+    border-color: var(--espresso);
+  }
+
+  .cat-pill.active::after { transform: scaleX(1); }
+
+  /* Menu Grid */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  .menu-item {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,.07);
+    transition: all .35s cubic-bezier(.25,.46,.45,.94);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: itemIn .5s forwards;
+  }
+
+  .menu-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(44,26,14,.15);
+  }
+
+  @keyframes itemIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .item-thumb {
+    height: 180px;
+    background: var(--parchment);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .item-thumb::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(44,26,14,.08));
+  }
+
+  .item-tag {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: var(--rust);
+    color: #fff;
+    font-size: 9px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    z-index: 1;
+  }
+
+  .item-body {
+    padding: 18px 20px;
+  }
+
+  .item-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--espresso);
+  }
+
+  .item-desc {
+    font-size: 12px;
+    color: #888;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .item-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .item-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--amber);
+  }
+
+  .item-add {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--espresso);
+    color: var(--cream);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s;
+  }
+
+  .item-add:hover {
+    background: var(--amber);
+    transform: rotate(90deg) scale(1.1);
+  }
+
+  /* Veg/Non-veg dot */
+  .veg-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    border: 2px solid;
+    display: inline-block;
+    margin-right: 6px;
+  }
+
+  .veg { border-color: var(--sage); background: var(--sage); }
+  .nonveg { border-color: var(--rust); background: var(--rust); }
+
+  /* Empty state */
+  .empty-state {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 60px 20px;
+    color: #aaa;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-style: italic;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,.7);
+    padding: 60px 40px 30px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 50px;
+    max-width: 1100px;
+    margin: 0 auto 50px;
+  }
+
+  .footer-brand .logo-text span:first-child { color: #fff; font-size: 22px; }
+
+  .footer-desc {
+    font-size: 13px;
+    line-height: 1.7;
+    color: rgba(255,255,255,.5);
+    margin-top: 14px;
+    max-width: 280px;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .social-btn {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: rgba(255,255,255,.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background .2s;
+    text-decoration: none;
+  }
+
+  .social-btn:hover { background: var(--amber); }
+
+  .footer-col h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--cream);
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+
+  .footer-col p, .footer-col a {
+    font-size: 13px;
+    line-height: 1.9;
+    color: rgba(255,255,255,.55);
+    text-decoration: none;
+    display: block;
+    transition: color .2s;
+  }
+
+  .footer-col a:hover { color: var(--gold); }
+
+  /* Map embed placeholder */
+  .map-wrap {
+    border-radius: 12px;
+    overflow: hidden;
+    height: 160px;
+    background: #333;
+    margin-top: 14px;
+    position: relative;
+  }
+
+  .map-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: grayscale(1) invert(1);
+    opacity: .7;
+  }
+
+  .map-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: rgba(255,255,255,.5);
+    font-size: 13px;
+    background: rgba(255,255,255,.05);
+    border: 1px dashed rgba(255,255,255,.15);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background .2s;
+    text-decoration: none;
+  }
+
+  .map-placeholder:hover { background: rgba(200,134,42,.15); color: var(--gold); }
+  .map-placeholder span:first-child { font-size: 28px; }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,.08);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    font-size: 12px;
+    color: rgba(255,255,255,.3);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  @media (max-width: 768px) {
+    header { padding: 0 20px; }
+    .header-nav { display: none; }
+    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+    .hero-title { font-size: 52px; }
+    .menu-grid { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <a href="#" class="logo-wrap">
+    <div class="logo-icon">🎓</div>
+    <div class="logo-text">
+      <span>Professor's Bistro</span>
+      <span>Est. · Fine Dining</span>
+    </div>
+  </a>
+  <nav>
+    <ul class="header-nav">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#footer">Location</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Welcome to</p>
+    <h1 class="hero-title">Professor's<br><em>Bistro</em></h1>
+    <p class="hero-subtitle">Where every bite is a lesson in flavour</p>
+
+    <p class="trending-label">🔥 Trending Right Now</p>
+    <div class="trending-row" id="trendingRow">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══ MENU ═══ -->
+<section class="menu-section" id="menu">
+  <div class="section-header">
+    <p class="section-eyebrow">Our Full Menu</p>
+    <h2 class="section-title">What Would You<br><em style="font-style:italic;color:var(--amber)">Like Today?</em></h2>
+  </div>
+
+  <div class="cat-pills" id="catPills"></div>
+  <div class="menu-grid" id="menuGrid"></div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer id="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo-wrap">
+        <div class="logo-icon">🎓</div>
+        <div class="logo-text">
+          <span>Professor's Bistro</span>
+          <span>Est. · Fine Dining</span>
+        </div>
+      </div>
+      <p class="footer-desc">A cosy retreat where culinary craft meets academic warmth. Great food, great company, always.</p>
+      <div class="footer-socials">
+        <a class="social-btn" href="https://www.instagram.com/professors_bistro" target="_blank">📸</a>
+        <a class="social-btn" href="#">📘</a>
+        <a class="social-btn" href="#">🐦</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Hours</h4>
+      <p>Mon – Fri &nbsp; 8am – 10pm</p>
+      <p>Saturday &nbsp; 9am – 11pm</p>
+      <p>Sunday &nbsp; 10am – 9pm</p>
+      <br>
+      <h4 style="margin-top:0">Contact</h4>
+      <a href="tel:+919876543210">📞 +91 98765 43210</a>
+      <a href="mailto:hello@professorsbistro.com">✉️ hello@professorsbistro.com</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>📍 Find Us</h4>
+      <p>Professor's Bistro,<br>Chanakya Puri,<br>Indore, MP 452010</p>
+      <div class="map-wrap">
+        <a class="map-placeholder" href="https://maps.google.com/?q=Professors+Bistro+Indore" target="_blank">
+          <span>🗺️</span>
+          <span>Open in Google Maps</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2025 Professor's Bistro. All rights reserved.</span>
+    <span>Made with YashDev</span>
+  </div>
+</footer>
+
+<script>
+// ─── DATA ───────────────────────────────────────────────
+const menuData = {
+  "Pizza": [
+    { name:"Margherita Classic", desc:"San Marzano tomato, fresh mozzarella, basil drizzle", price:"₹299", emoji:"🍕", tag:"Best Seller", veg:true },
+    { name:"Chicken BBQ", desc:"Smoked chicken, caramelised onions, BBQ base", price:"₹379", emoji:"🍕", tag:"", veg:false },
+    { name:"Truffle Mushroom", desc:"Wild mushrooms, truffle cream, parmesan shavings", price:"₹399", emoji:"🍕", tag:"Chef's Pick", veg:true },
+    { name:"Pepperoni Blast", desc:"Double pepperoni, jalapeño, mozzarella", price:"₹359", emoji:"🍕", tag:"Spicy 🌶", veg:false },
+  ],
+  "Burgers": [
+    { name:"Smash Classic", desc:"Double smash patty, American cheese, pickles, special sauce", price:"₹289", emoji:"🍔", tag:"#1 Seller", veg:false },
+    { name:"Crispy Chicken", desc:"Buttermilk fried chicken, coleslaw, chipotle mayo", price:"₹259", emoji:"🍔", tag:"", veg:false },
+    { name:"Bombay Veggie", desc:"Spiced potato & bean patty, mint chutney, onion rings", price:"₹219", emoji:"🍔", tag:"", veg:true },
+    { name:"Prof's Special", desc:"Wagyu blend, foie gras butter, truffle aioli", price:"₹449", emoji:"🍔", tag:"Premium", veg:false },
+  ],
+  "Pasta": [
+    { name:"Cacio e Pepe", desc:"Tonnarelli, pecorino romano, cracked pepper", price:"₹299", emoji:"🍝", tag:"Trending", veg:true },
+    { name:"Pesto Chicken", desc:"Penne, basil pesto, grilled chicken, sun-dried tomato", price:"₹329", emoji:"🍝", tag:"", veg:false },
+    { name:"Arrabbiata", desc:"Rigatoni, spicy tomato, garlic, capers", price:"₹279", emoji:"🍝", tag:"Spicy 🌶", veg:true },
+  ],
+  "Coffee": [
+    { name:"Signature Espresso", desc:"Single origin Ethiopian beans, velvety crema", price:"₹149", emoji:"☕", tag:"Must Try", veg:true },
+    { name:"Iced Caramel Latte", desc:"Cold-brew espresso, oat milk, salted caramel", price:"₹189", emoji:"🧋", tag:"", veg:true },
+    { name:"Cortado", desc:"Equal parts espresso & steamed milk, balanced & bold", price:"₹159", emoji:"☕", tag:"", veg:true },
+    { name:"Dalgona Whip", desc:"Whipped coffee cloud over cold milk", price:"₹199", emoji:"🥛", tag:"Trending", veg:true },
+  ],
+  "Desserts": [
+    { name:"Tiramisu", desc:"Espresso-soaked ladyfingers, mascarpone, cocoa dust", price:"₹229", emoji:"🍰", tag:"Best Seller", veg:true },
+    { name:"Molten Lava Cake", desc:"Dark chocolate centre, vanilla bean ice cream", price:"₹249", emoji:"🍫", tag:"Hot", veg:true },
+    { name:"Crème Brûlée", desc:"Classic vanilla custard, caramelised sugar crust", price:"₹219", emoji:"🍮", tag:"", veg:true },
+  ],
+  "Starters": [
+    { name:"Truffle Fries", desc:"Crispy fries, truffle oil, parmesan, herbs", price:"₹199", emoji:"🍟", tag:"Popular", veg:true },
+    { name:"Chicken Wings", desc:"Buffalo glazed, blue cheese dip, celery", price:"₹299", emoji:"🍗", tag:"", veg:false },
+    { name:"Bruschetta Trio", desc:"Three flavours: classic tomato, mushroom, pesto ricotta", price:"₹249", emoji:"🥖", tag:"", veg:true },
+    { name:"Nachos Grande", desc:"Loaded nachos, cheese sauce, guacamole, jalapeños", price:"₹279", emoji:"🌮", tag:"", veg:true },
+  ],
+  "Shakes": [
+    { name:"Nutella Overload", desc:"Hazelnut shake, Oreo crumble, whipped cream", price:"₹229", emoji:"🥤", tag:"Top Rated", veg:true },
+    { name:"Mango Tango", desc:"Fresh Alphonso mango, vanilla, hint of saffron", price:"₹199", emoji:"🥭", tag:"Seasonal", veg:true },
+    { name:"Dark Choco Blast", desc:"Belgian dark chocolate, espresso shot, cream", price:"₹239", emoji:"🍫", tag:"", veg:true },
+  ],
+};
+
+const trending = [
+  { name:"Smash Burger", price:"₹289", emoji:"🍔", cat:"Burgers" },
+  { name:"Cacio e Pepe", price:"₹299", emoji:"🍝", cat:"Pasta" },
+  { name:"Signature Latte", price:"₹189", emoji:"🧋", cat:"Coffee" },
+  { name:"Molten Lava", price:"₹249", emoji:"🍫", cat:"Desserts" },
+  { name:"Truffle Pizza", price:"₹399", emoji:"🍕", cat:"Pizza" },
+];
+
+// ─── TRENDING ──────────────────────────────────────────
+const trendRow = document.getElementById('trendingRow');
+trending.forEach((t, i) => {
+  const el = document.createElement('div');
+  el.className = 'trend-card';
+  el.style.animationDelay = `${i * 0.1}s`;
+  el.innerHTML = `
+    <span class="badge">🔥 HOT</span>
+    <span class="trend-emoji">${t.emoji}</span>
+    <div class="trend-name">${t.name}</div>
+    <div class="trend-price">${t.price}</div>`;
+  el.addEventListener('click', () => {
+    document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => setCategory(t.cat), 600);
+  });
+  trendRow.appendChild(el);
+});
+
+// ─── CATEGORY PILLS ────────────────────────────────────
+let activeCategory = 'All';
+const catPillsEl = document.getElementById('catPills');
+const categories = ['All', ...Object.keys(menuData)];
+const catIcons = { All:'🍽️', Pizza:'🍕', Burgers:'🍔', Pasta:'🍝', Coffee:'☕', Desserts:'🍰', Starters:'🥙', Shakes:'🥤' };
+
+function setCategory(cat) {
+  activeCategory = cat;
+  document.querySelectorAll('.cat-pill').forEach(p => p.classList.toggle('active', p.dataset.cat === cat));
+  renderMenu();
+}
+
+categories.forEach(cat => {
+  const btn = document.createElement('button');
+  btn.className = 'cat-pill' + (cat === 'All' ? ' active' : '');
+  btn.dataset.cat = cat;
+  btn.innerHTML = `<span>${catIcons[cat] || '🍴'} ${cat}</span>`;
+  btn.addEventListener('click', () => setCategory(cat));
+  catPillsEl.appendChild(btn);
+});
+
+// ─── MENU RENDER ───────────────────────────────────────
+function renderMenu() {
+  const grid = document.getElementById('menuGrid');
+  grid.innerHTML = '';
+
+  const items = activeCategory === 'All'
+    ? Object.entries(menuData).flatMap(([cat, arr]) => arr.map(i => ({ ...i, cat })))
+    : menuData[activeCategory] || [];
+
+  if (items.length === 0) {
+    grid.innerHTML = '<div class="empty-state">Nothing here yet — check back soon!</div>';
+    return;
+  }
+
+  items.forEach((item, idx) => {
+    const el = document.createElement('div');
+    el.className = 'menu-item';
+    el.style.animationDelay = `${idx * 0.06}s`;
+    el.innerHTML = `
+      <div class="item-thumb">
+        ${item.tag ? `<span class="item-tag">${item.tag}</span>` : ''}
+        ${item.emoji}
+      </div>
+      <div class="item-body">
+        <div class="item-name">
+          <span class="veg-dot ${item.veg ? 'veg' : 'nonveg'}"></span>${item.name}
+        </div>
+        <p class="item-desc">${item.desc}</p>
+        <div class="item-footer">
+          <span class="item-price">${item.price}</span>
+          <button class="item-add" title="Add to order">+</button>
+        </div>
+      </div>`;
+    grid.appendChild(el);
+  });
+}
+
+renderMenu();
+</script>
+</body>
+</html>
